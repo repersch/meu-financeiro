@@ -1,6 +1,7 @@
 const banco = require("../config/database/db");
 const Financa = require("../models/financa.js");
 const usuarioController = require("../controllers/usuarioController.js");
+const Usuario = require("../models/usuario");
 
 const financa_salvar = (usuarioController.checkToken, async(req, res) => {
     await banco.sync();
@@ -24,9 +25,40 @@ const financa_salvar = (usuarioController.checkToken, async(req, res) => {
 
     res.send(financaSalva);
     res.status(201);
-})
+});
+
+const financa_listarTodas = (usuarioController.checkToken, async(req, res) => {
+    const financas = await Financa.findAll();
+    res.send(financas);
+});
+
+const financa_buscarPorUsuario = (usuarioController.checkToken, async(req, res) => {
+    const idUsuarioBuscado = req.params.idUsuario;
+    if (!await Usuario.findByPk(idUsuarioBuscado)) {
+        return res.status(404).json({"mensagem": "Não existe usuário cadastrado com esse Id."});
+    }
+
+    const financasUsuario = await Financa.findAll( {
+        where: {
+            idUsuario: idUsuarioBuscado 
+        }
+    });
+    res.send(financasUsuario);
+});
+
+const financa_buscarPorId = (usuarioController.checkToken, async(req, res) => {
+    const financaBuscada = await Financa.findByPk(req.params.id);
+
+    if (!financaBuscada) {
+        return res.status(404).json({"mensagem": "Não existe finança cadastrada com esse Id."});
+    }
+    res.send(financaBuscada);
+});
 
 
 module.exports = {
-    financa_salvar
+    financa_salvar,
+    financa_listarTodas,
+    financa_buscarPorUsuario,
+    financa_buscarPorId
 }
