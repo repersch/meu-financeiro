@@ -5,6 +5,7 @@ const app = express();
 
 //const sequelize = require("./config/database/db.js");
 const usuarioRoutes = require("./routes/usuarioRoutes.js");
+const financaRoutes = require("./routes/financaRoutes.js");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
  * Chamada para as rotas de usuário em usuarioRoutes.js
  */
 app.use(usuarioRoutes);
+app.use(financaRoutes);
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);

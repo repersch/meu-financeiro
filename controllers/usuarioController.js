@@ -30,7 +30,7 @@ const usuario_salvar =  (checkToken, async (req, res) => {
 
 
 const usuario_login = (async (req, res) => {
-    console.log(`Waiting login...`);
+    console.log(`Esperando login...`);
     const userName = req.headers["username"];
     const password = req.headers["password"];
     const usuarioLogar = await Usuario.findOne({ where: { nome: userName }})
@@ -50,7 +50,7 @@ const usuario_login = (async (req, res) => {
         });
     }
 
-    console.log(`Unauthorized access. Check your login and/or your password.`);
+    console.log(`Acesso não autorizado. Verifique o login e/ou senha.`);
     return res.status(401).json({
         logged: false,
         token: null
@@ -112,7 +112,7 @@ function checkToken(req, res, next) {
     jwt.verify(token, publicKey, { algorithms: ["RS256"] }, function (err, decoded) {
         if (err) {
             console.log(err);
-            return res.status(401).json({ logged: false, msg: "Invalid token! Try again..." })
+            return res.status(401).json({ logged: false, msg: "Token inválido. Tente novamente..." })
         }
         console.log("Token decrypted");
         console.log(decoded);
@@ -129,5 +129,6 @@ module.exports = {
     usuario_login,
     usuario_listar_um,
     usuario_editar,
-    usuario_excluir
+    usuario_excluir,
+    checkToken
 }
