@@ -61,17 +61,10 @@ const financa_editar = (usuarioController.checkToken, async (req, res) => {
         return res.status(404).json({"mensagem": "Não existe finança cadastrada com esse Id."});
     }
 
-    //if (!req.body.senha) {
-    //    return res.status(400).json({"mensagem": "Por favor, digite a nova senha"});
-    //}
-
-    //usuario.senha = req.body.senha;
-
     financa.descricao = req.body.descricao;
     financa.valor = req.body.valor;
     financa.categoria = req.body.categoria;
     financa.tipo = req.body.tipo;
-    financa.idUsuario = req.body.idUsuario;
 
     res.send(await financa.save());
 });
