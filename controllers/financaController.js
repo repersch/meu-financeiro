@@ -76,11 +76,20 @@ const financa_editar = (usuarioController.checkToken, async (req, res) => {
     res.send(await financa.save());
 });
 
+const financa_excluir = (usuarioController.checkToken, async (req, res) => {
+    const financa = await Financa.findByPk(req.params.id);
+    if (!financa) {
+        return res.status(404).json({"mensagem": "Não existe finança cadastrada com esse Id."});
+    }
+
+    res.send(await financa.destroy());
+});
 
 module.exports = {
     financa_salvar,
     financa_listarTodas,
     financa_buscarPorUsuario,
     financa_buscarPorId,
-    financa_editar
+    financa_editar,
+    financa_excluir
 }

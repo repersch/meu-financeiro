@@ -8,5 +8,6 @@ router.get("/financa", financaController.financa_listarTodas);
 router.get("/financa/usuario/:idUsuario", financaController.financa_buscarPorUsuario);
 router.get("/financa/:id", financaController.financa_buscarPorId);
 router.put("/financa/editar/:id", financaController.financa_editar);
+router.delete("/financa/excluir/:id", financaController.financa_excluir);
 
 module.exports = router;
