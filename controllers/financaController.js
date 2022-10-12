@@ -3,7 +3,7 @@ const Financa = require("../models/financa.js");
 const usuarioController = require("../controllers/usuarioController.js");
 const Usuario = require("../models/usuario");
 
-const financa_salvar = (usuarioController.checkToken, async(req, res) => {
+const financa_salvar = (usuarioController.checkToken, async (req, res) => {
     await banco.sync();
 
     const descricaoSalvar = req.body.descricao;
@@ -27,30 +27,30 @@ const financa_salvar = (usuarioController.checkToken, async(req, res) => {
     res.status(201);
 });
 
-const financa_listarTodas = (usuarioController.checkToken, async(req, res) => {
+const financa_listarTodas = (usuarioController.checkToken, async (req, res) => {
     const financas = await Financa.findAll();
     res.send(financas);
 });
 
-const financa_buscarPorUsuario = (usuarioController.checkToken, async(req, res) => {
+const financa_buscarPorUsuario = (usuarioController.checkToken, async (req, res) => {
     const idUsuarioBuscado = req.params.idUsuario;
     if (!await Usuario.findByPk(idUsuarioBuscado)) {
-        return res.status(404).json({"mensagem": "Não existe usuário cadastrado com esse Id."});
+        return res.status(404).json({ "mensagem": "Não existe usuário cadastrado com esse Id." });
     }
 
-    const financasUsuario = await Financa.findAll( {
+    const financasUsuario = await Financa.findAll({
         where: {
-            idUsuario: idUsuarioBuscado 
+            idUsuario: idUsuarioBuscado
         }
     });
     res.send(financasUsuario);
 });
 
-const financa_buscarPorId = (usuarioController.checkToken, async(req, res) => {
+const financa_buscarPorId = (usuarioController.checkToken, async (req, res) => {
     const financaBuscada = await Financa.findByPk(req.params.id);
 
     if (!financaBuscada) {
-        return res.status(404).json({"mensagem": "Não existe finança cadastrada com esse Id."});
+        return res.status(404).json({ "mensagem": "Não existe finança cadastrada com esse Id." });
     }
     res.send(financaBuscada);
 });
@@ -58,7 +58,7 @@ const financa_buscarPorId = (usuarioController.checkToken, async(req, res) => {
 const financa_editar = (usuarioController.checkToken, async (req, res) => {
     const financa = await Financa.findByPk(req.params.id);
     if (!financa) {
-        return res.status(404).json({"mensagem": "Não existe finança cadastrada com esse Id."});
+        return res.status(404).json({ "mensagem": "Não existe finança cadastrada com esse Id." });
     }
 
     financa.descricao = req.body.descricao;
@@ -72,7 +72,7 @@ const financa_editar = (usuarioController.checkToken, async (req, res) => {
 const financa_excluir = (usuarioController.checkToken, async (req, res) => {
     const financa = await Financa.findByPk(req.params.id);
     if (!financa) {
-        return res.status(404).json({"mensagem": "Não existe finança cadastrada com esse Id."});
+        return res.status(404).json({ "mensagem": "Não existe finança cadastrada com esse Id." });
     }
 
     res.send(await financa.destroy());

@@ -28,7 +28,7 @@ const Financa = database.define("financa", {
     categoria: {
         type: String,
         allowNull: false
-    }, 
+    },
     tipo: {
         type: tipo,
         allowNull: false

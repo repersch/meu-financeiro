@@ -4,8 +4,7 @@ const Usuario = require("../models/usuario.js");
 
 const banco = require("../config/database/db");
 
-
-const usuario_salvar =  (checkToken, async (req, res) => {
+const usuario_salvar = (checkToken, async (req, res) => {
     await banco.sync();
 
     const nomeSalvar = req.body.nome;
@@ -18,24 +17,23 @@ const usuario_salvar =  (checkToken, async (req, res) => {
             nome: nomeSalvar,
             senha: senhaSalvar
         })
-    
+
         res.send(usuarioSalvo);
     } else {
         return res.status(404).json({
             info: "Usuário já cadastrado."
-        });  
+        });
     }
 
 });
-
 
 const usuario_login = (async (req, res) => {
     console.log(`Esperando login...`);
     const userName = req.headers["username"];
     const password = req.headers["password"];
-    const usuarioLogar = await Usuario.findOne({ where: { nome: userName }})
+    const usuarioLogar = await Usuario.findOne({ where: { nome: userName } })
 
-    if (usuarioLogar !== undefined && usuarioLogar.nome === userName && usuarioLogar.senha === password) {
+    if (usuarioLogar !== null && usuarioLogar !== undefined && usuarioLogar.nome === userName && usuarioLogar.senha === password) {
         const id = usuarioLogar.id;
 
         var privateKey = fs.readFileSync("./config/security/privateKey.key", "utf-8");
@@ -58,47 +56,42 @@ const usuario_login = (async (req, res) => {
     });
 });
 
-
 const usuario_listarTodos = (checkToken, async (req, res) => {
     const usuarios = await Usuario.findAll();
     res.send(usuarios);
 });
 
-
 const usuario_listar_um = (checkToken, async (req, res) => {
     const usuarioBuscado = await Usuario.findByPk(req.params.id);
     if (!usuarioBuscado) {
-        return res.status(404).json({"mensagem": "Não existe usuário cadastrado com esse Id."});
+        return res.status(404).json({ "mensagem": "Não existe usuário cadastrado com esse Id." });
     }
 
     res.send(usuarioBuscado);
 });
 
-
 const usuario_editar = (checkToken, async (req, res) => {
     const usuario = await Usuario.findByPk(req.params.id);
     if (!usuario) {
-        return res.status(404).json({"mensagem": "Não existe usuário cadastrado com esse Id."});
+        return res.status(404).json({ "mensagem": "Não existe usuário cadastrado com esse Id." });
     }
 
     if (!req.body.senha) {
-        return res.status(400).json({"mensagem": "Por favor, digite a nova senha"});
+        return res.status(400).json({ "mensagem": "Por favor, digite a nova senha" });
     }
 
     usuario.senha = req.body.senha;
     res.send(await usuario.save());
 });
 
-
 const usuario_excluir = (checkToken, async (req, res) => {
     const usuario = await Usuario.findByPk(req.params.id);
     if (!usuario) {
-        return res.status(404).json({"mensagem": "Não existe usuário cadastrado com esse Id."});
+        return res.status(404).json({ "mensagem": "Não existe usuário cadastrado com esse Id." });
     }
 
     res.send(await usuario.destroy());
 })
-
 
 function checkToken(req, res, next) {
     console.log(`Checking token...`);
@@ -122,7 +115,6 @@ function checkToken(req, res, next) {
     });
 
 }
-
 
 module.exports = {
     usuario_salvar,
