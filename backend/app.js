@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const port = 8081;
@@ -8,6 +9,8 @@ const app = express();
 const usuarioRoutes = require("./routes/usuarioRoutes.js");
 const financaRoutes = require("./routes/financaRoutes.js");
 const i18n = require("i18n");
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
