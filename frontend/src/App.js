@@ -1,4 +1,23 @@
-import { useState, useEffect } from 'react';
+import Header from './components/Header/header.js';
+
+function App() {
+  return (
+    <>
+      <Header />
+      <main>
+        <section>
+          <div>
+            <p>Seção em desenvolvimento</p>
+          </div>
+        </section>
+      </main>
+    </>
+  )
+}
+
+export default App;
+
+/* import { useState, useEffect } from 'react';
 
 function App() {
   const [state, setState] = useState([]);
@@ -54,4 +73,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; */
