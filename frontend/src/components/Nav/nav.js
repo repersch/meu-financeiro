@@ -5,7 +5,7 @@ function Nav() {
         <nav>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <Link class="nav-link active" to='/' >Início</Link>
+                    <Link class="nav-link" to='/' >Início</Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" to='/usuario' >Usuário</Link>
@@ -14,7 +14,7 @@ function Nav() {
                     <Link class="nav-link" to='/financa' >Finanças</Link>
                 </li>
 
-{/*                 <li class="nav-item">
+                {/*                 <li class="nav-item">
                     <a class="nav-link" href="#">Contato</a>
                 </li>
                 <li class="nav-item">
