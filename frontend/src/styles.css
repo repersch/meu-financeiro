@@ -9,8 +9,8 @@
 
 body,
 html {
-  background-color: #000;
-  color: #fff;
+  background-color: #fff;
+  color: #101010;
 }
 
 main {
@@ -20,56 +20,54 @@ main {
 }
 
 header {
-  height: 220px;
-  background: linear-gradient(180deg, #102347 0%, #181818 100%);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: left;
 }
 
-section {
-  background-color: #283142;
+#principal {
+  width: auto;
+  background-color: #f2bf16;
   border-radius: 10px;
   padding: 30px 10px;
   margin-top: 30px;
 }
 
+
 table {
   width: 100%;
   text-align: center;
+  background-color: #e4e2db;
 }
 
 table thead {
   height: 20px;
   font-size: 18px;
-  color: #e9e9e9;
+  color: #000000;
 }
 
 table tbody {
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 200;
-  color: #cfcfcf;
+  color: #000000;
   text-align: center;
 }
 
 table tbody tr {
   height: 74px;
-  border-top: 1px solid #5f6e82;
+  border-top: 1px solid #191a1b;
 }
 
 table tbody tr:hover>td {
-  background-color: #676fff;
+  background-color: #abaaa2;
 }
 
-table tbody tr:nth-child(odd) {
-  background-color: #007565;
-}
 
 footer {
   margin-top: 30px;
   height: 220px;
-  background: linear-gradient(180deg, #102347 0%, #181818 100%);
+  background: linear-gradient(180deg, #e4e2db 0%, #474545 100%);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #000000;
 }

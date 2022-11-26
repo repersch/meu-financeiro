@@ -43,7 +43,14 @@ function Financa() {
     );
 
     return (
-        <div>
+        <div id='principal'>
+            <section id="home-section">
+                <h2>Bem vindo $nomeUsuario !</h2>
+                <p>Sua última atualização foi em $updatedAt</p>
+            </section>
+            <section style={{ padding: 100 }}>
+
+            </section>
             <table className="financa-table" border="1">
                 <thead>
                     <tr className="show-cell">

@@ -1,10 +1,13 @@
+import logo from "../../assets/img/logo13.jpg"
+
 function Header() {
     return (
         <>
             <header>
-                <h1>MEU FINANCEIRO</h1>
+                <div>
+                    <img src={logo} />
+                </div>
             </header>
-            <p>Desenvolvido por João Mateus | Renata Camacho</p>
         </>
     )
 }
