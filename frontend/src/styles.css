@@ -26,48 +26,40 @@ header {
 
 #principal {
   width: auto;
-  background-color: #f2bf16;
+  background-color: #e4e2db;
   border-radius: 10px;
   padding: 30px 10px;
   margin-top: 30px;
 }
 
-
 table {
-  width: 100%;
-  text-align: center;
-  background-color: #e4e2db;
+  margin: auto;
+  width: 90%;
+  background-color: #ffffff;
+  border-radius: 10px;
 }
 
-table thead {
-  height: 20px;
+th, td {
+  padding: 15px;
+}
+
+thead {
+  font-size: 21px;
+}
+
+tbody {
   font-size: 18px;
-  color: #000000;
-}
-
-table tbody {
-  font-size: 18px;
-  font-weight: 200;
-  color: #000000;
-  text-align: center;
-}
-
-table tbody tr {
-  height: 74px;
-  border-top: 1px solid #191a1b;
 }
 
 table tbody tr:hover>td {
-  background-color: #abaaa2;
+  background-color: #f2bf16;
 }
-
 
 footer {
   margin-top: 30px;
-  height: 220px;
+  height: 100px;
   background: linear-gradient(180deg, #e4e2db 0%, #474545 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
 }

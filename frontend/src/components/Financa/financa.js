@@ -1,7 +1,14 @@
 import { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Modal from 'react-bootstrap/Modal';
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+
 
 function Financa() {
     const [state, setState] = useState([]);
+    const totalDespesas = calcularTotal("DESPESA").toFixed(2)
+    const totalReceitas = calcularTotal("RECEITA").toFixed(2)
 
     // Sugestão para tratamento de erros (bem simplificado)
     const [erro, setErro] = useState({
@@ -40,21 +47,50 @@ function Financa() {
 
             // Atualizar o state a partir das informações coletadas
         }, []
+
     );
+
+    function calcularTotal(tipoFinanca) {
+        return state
+        .filter(financa => financa.tipo === tipoFinanca)
+        .reduce((totalReceitas, receita) => totalReceitas + receita.valor, 0)
+    }
+
 
     return (
         <div id='principal'>
+
             <section id="home-section">
                 <h2>Bem vindo $nomeUsuario !</h2>
                 <p>Sua última atualização foi em $updatedAt</p>
             </section>
-            <section style={{ padding: 100 }}>
 
+            <section>
+                <CardGroup style={{ margin: '20px', color: '#ffffff' }}>
+                    <Card bg='success' style={{ padding: '10px', margin: '20px'}}>
+                        <Card.Body>
+                        <Card.Subtitle>Total receitas</Card.Subtitle><br></br>
+                        <Card.Title>R$ {totalReceitas}</Card.Title>
+                        </Card.Body>
+                    </Card>
+                    <Card bg="danger" style={{ padding: '10px', margin: '20px' }}>
+                        <Card.Body>
+                        <Card.Subtitle>Total despesas</Card.Subtitle><br></br>
+                        <Card.Title>R$ {totalDespesas}</Card.Title>
+                        </Card.Body>
+                    </Card>
+                    <Card bg="warning" style={{ padding: '10px', margin: '20px' }}>
+                        <Card.Body>
+                        <Card.Subtitle>Saldo</Card.Subtitle><br></br>
+                        <Card.Title>R$ {(totalReceitas - totalDespesas).toFixed(2)}</Card.Title>
+                        </Card.Body>
+                    </Card>
+                </CardGroup>
             </section>
-            <table className="financa-table" border="1">
+
+            <table className="financa-table">
                 <thead>
                     <tr className="show-cell">
-                        <th>ID</th>
                         <th>Descrição</th>
                         <th>Categoria</th>
                         <th>Tipo</th>
@@ -66,11 +102,12 @@ function Financa() {
                 <tbody>
                     {state.map((financa) => (
                         <tr key={financa.id}>
-                            <td>{financa.id}</td>
                             <td>{financa.descricao}</td>
                             <td>{financa.categoria}</td>
                             <td>{financa.tipo}</td>
-                            <td>{financa.valor}</td>
+                            <td>R$ {(financa.valor).toFixed(2)}</td>
+                            <td>Editar</td>
+                            <td>Apagar</td>
                         </tr>
                     ))}
                 </tbody>
@@ -78,5 +115,7 @@ function Financa() {
         </div>
     );
 }
+
+
 
 export default Financa;
