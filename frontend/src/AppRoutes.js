@@ -1,5 +1,6 @@
-import Nav from './components/Nav/nav';
-import Home from './components/Home/home';
+import Nav from './components/Nav/nav.js';
+import Home from './components/Home/home.js';
+import Financa from './components/Financa/financa.js';
 
 import { BrowserRouter as Router, Routes, Route, Link, Outlet, useParams } from 'react-router-dom'
 
@@ -9,7 +10,8 @@ function AppRoutes() {
             <Nav />
 
             <Routes>
-            <Route path='/' element={<Home />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/financa' index element={<Financa />} />
 
                 {/*                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
