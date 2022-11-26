@@ -44,12 +44,30 @@ function Financa() {
 
     return (
         <div>
-            <h3>Listagem de Finanças</h3>
-            <ul>
-                {state.map((financa, indice) => {
-                    return <li key={financa.id}>{financa.descricao}</li>
-                })}
-            </ul>
+            <table className="financa-table" border="1">
+                <thead>
+                    <tr className="show-cell">
+                        <th>ID</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Editar</th>
+                        <th>Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {state.map((financa) => (
+                        <tr key={financa.id}>
+                            <td>{financa.id}</td>
+                            <td>{financa.descricao}</td>
+                            <td>{financa.categoria}</td>
+                            <td>{financa.tipo}</td>
+                            <td>{financa.valor}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }
