@@ -1,4 +1,5 @@
 import Nav from './components/Nav/nav.js';
+import Login from './components/Login/login.js';
 import Home from './components/Home/home.js';
 import Financa from './components/Financa/financa.js';
 import Usuario from './components/Usuario/usuario.js';
@@ -11,15 +12,10 @@ function AppRoutes() {
             <Nav />
 
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<Login />} />
+                <Route path='/home' element={<Home />} />
                 <Route path='/financa' element={<Financa />} />
                 <Route path='/usuario' element={<Usuario />} />
-                {/*                 <Route path='/' element={<Home />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/alunos' element={<Students />}>
-                    <Route index element={<StudentsList />} />
-                    <Route path=':code' element={<StudentInfo />} />
-                </Route> */}
             </Routes>
         </Router>
     )

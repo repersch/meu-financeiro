@@ -1,7 +1,35 @@
 import { useState, useEffect } from 'react';
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
+import api from '../../service/api.js';
+
 function Usuario() {
+    const localStorageItens = JSON.parse(localStorage.getItem('usuarioInfo'));
+
     const [state, setState] = useState([]);
+    const [usuario, setUsuario] = useState([]);
+
+    useEffect(() => {
+        api
+            .get(`/usuario/${localStorageItens.idUsuario}`, {
+                headers: {
+                    'x-access-token': localStorageItens.token
+                }
+            })
+            .then((resposta) => {
+                if (resposta.status >= 200 && resposta.status <= 299) {
+                    setUsuario(resposta.data)
+                }
+                else {
+                    console.log(`Erro! Requisição com código ${resposta.status}`);
+                }
+            })
+            .catch((err) => {
+                console.error("Ops! Ocorreu um erro!" + err);
+            });
+    }, []);
 
     // Sugestão para tratamento de erros (bem simplificado)
     const [erro, setErro] = useState({
@@ -9,47 +37,78 @@ function Usuario() {
         mensagemErro: ""
     });
 
-    useEffect(
-        () => {
-            // Executar fetch para pegar informações
-            // Necessário criar uma async function pois o fetch é assíncrono (await)
-            async function buscaDados() {
-                const resposta =
-                    await fetch('http://localhost:8081/usuario/listarTodos').catch((erro) => {
-                        // Tratamento de erro de execução
-                        console.log("Erro ao realizar o fetch");
-                        setErro({
-                            hasErro: true,
-                            mensagemErro: "Erro ao realizar o fetch"
-                        });
-                    })
-                // Tratamento de erro de aplicação
-                //console.table(resposta);
-                if (resposta.status >= 200 && resposta.status <= 299) {
-                    // Caso der tudo certo é executado esse bloco de código
-                    const respostaJson = await resposta.json();
-                    setState(respostaJson);
-                    console.table(respostaJson);
-                }
-                else {
-                    console.log(`Erro! Requisição com código ${resposta.status}`);
-                }
-            }
+    const formularioInicial = ({
+        id: localStorageItens.idUsuario,
+        nome: usuario.nome,
+        senha: usuario.senha,
+        createdAt: usuario.createdAt,
+        updatedAt: usuario.updatedAt
+    });
 
-            buscaDados();
+    const [formData, updateFormData] = useState(formularioInicial);
 
-            // Atualizar o state a partir das informações coletadas
-        }, []
-    );
+    const handleChange = (e) => {
+        updateFormData({
+            ...formData,
+
+            // Trimming any whitespace
+            [e.target.name]: e.target.value.trim()
+        });
+    };
+
+    const enviarDados = (e) => {
+        const usuarioParaEditar = {
+            id: localStorageItens.idUsuario,
+            nome: formData.nome,
+            senha: formData.senha,
+            createdAt: usuario.createdAt,
+            updatedAt: usuario.updatedAt
+        };
+
+        api
+            .put(`/usuario/editar/${localStorageItens.idUsuario}`, usuarioParaEditar, {
+                headers: {
+                    'x-access-token': localStorageItens.token
+                }
+            })
+            .then(resposta => console.log("Posting data: ", resposta))
+            .catch((erro) => {
+                console.log("Erro ao realizar o fetch");
+                setErro({
+                    hasErro: true,
+                    mensagemErro: "Erro ao realizar o fetch"
+                });
+            });
+        window.location.reload();
+    };
 
     return (
         <div>
-            <h3>Listagem de Finanças</h3>
-            <ul>
-                {state.map((usuario, indice) => {
-                    return <li key={usuario.id}>{usuario.nome}</li>
-                })}
-            </ul>
+            <Form>
+                <Form.Group>
+                    Nome
+                    <Form.Control className='formControl'
+                        type="text"
+                        placeholder={usuario.nome}
+                        onChange={handleChange}
+                        name="nome"
+                        disabled
+                        style={{ padding: '10px', width: '235px', margin: '20px' }}
+                    />
+
+                    Senha
+                    <Form.Control className='formControl'
+                        type="text"
+                        onChange={handleChange}
+                        name="senha"
+                        placeholder={usuario.senha}
+                        style={{ padding: '10px', width: '235px', margin: '20px' }} />
+                </Form.Group>
+
+                <Button variant="warning" onClick={enviarDados}>
+                    Alterar dados
+                </Button>
+            </Form>
         </div>
     );
 }

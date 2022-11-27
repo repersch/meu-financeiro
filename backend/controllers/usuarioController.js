@@ -45,7 +45,8 @@ const usuario_login = (async (req, res) => {
         return res.status(200).json({
             mensagem: res.__("mensagem_login"),
             logged: true,
-            token: token
+            token: token,
+            idUsuario: usuarioLogar.id
         });
     }
 
