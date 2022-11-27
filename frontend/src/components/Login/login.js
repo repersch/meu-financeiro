@@ -72,10 +72,11 @@ function Login() {
     return (
         <div>
             <section id="login-section">
-                <h2>Login</h2>
+               
                 <div id="login-container">
                     <Form id="login-info-form">
                         <Form.Group>
+                            <h2>Login</h2>
                             <Form.Control className='formControl'
                                 style={{ padding: '10px', width: '235px', margin: '20px' }}
                                 type="text"

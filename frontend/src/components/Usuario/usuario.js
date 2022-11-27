@@ -84,7 +84,7 @@ function Usuario() {
 
     return (
         <div>
-            <Form>
+            <Form id="cadastro-usuario">
                 <Form.Group>
                     Nome
                     <Form.Control className='formControl'
@@ -103,11 +103,13 @@ function Usuario() {
                         name="senha"
                         placeholder={usuario.senha}
                         style={{ padding: '10px', width: '235px', margin: '20px' }} />
+
+                    <Button variant="warning" style={{ margin: '20px' }} onClick={enviarDados}>
+                        Alterar dados
+                    </Button>
                 </Form.Group>
 
-                <Button variant="warning" onClick={enviarDados}>
-                    Alterar dados
-                </Button>
+               
             </Form>
         </div>
     );

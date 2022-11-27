@@ -5,12 +5,15 @@ import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from "react-bootstrap/Button";
 import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import api from '../../service/api.js';
 
 import BotaoEditar from './BotaoEditar/botaoEditar.js';
 import BotaoDeletar from './BotaoDeletar/botaoDeletar.js';
-import FormCheckInput from 'react-bootstrap/esm/FormCheckInput.js';
+import BotaoAdicionarFinanca from '../../assets/img/botao-adicionar-financa.png'
 
 function Financa() {
     const localStorageItens = JSON.parse(localStorage.getItem('usuarioInfo'));
@@ -18,7 +21,9 @@ function Financa() {
     const [usuario, setUsuario] = useState([]);
 
     const [state, setState] = useState([]);
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
+    const [validacao, setValidacao] = useState(false);
+
     const fecharModal = () => setShow(false);
     const abrirModal = () => setShow(true);
 
@@ -54,6 +59,7 @@ function Financa() {
     }
 
     const enviarModal = (e) => {
+        
         const financaParaSalvar = {
             descricao: formData.descricao,
             valor: formData.valor,
@@ -132,9 +138,10 @@ function Financa() {
                     <Modal.Title>Nova Finança</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
-                        <Form.Group style={{ padding: '10px', margin: '20px' }}>
+                    <Form >
+                        <Form.Group required style={{ padding: '10px', margin: '20px' }}>
                             <Form.Control className='formControl'
+                                required
                                 style={{ padding: '10px', margin: '20px' }}
                                 type="text"
                                 placeholder="Descrição"
@@ -185,7 +192,7 @@ function Financa() {
                     <Button variant="danger" onClick={fecharModal}>
                         Fechar
                     </Button>
-                    <Button variant="success" onClick={enviarModal}>
+                    <Button variant="success" type='submit' onClick={enviarModal}>
                         Salvar finança
                     </Button>
                 </Modal.Footer>
@@ -193,12 +200,21 @@ function Financa() {
             </Modal>
 
             <section id="home-section">
-                <h2>Bem vindo(a), {usuario.nome}!</h2>
-                <p>Sua última atualização foi em {usuario.updatedAt}</p>
-                <Button variant="light" onClick={abrirModal}>Adicionar finança</Button>
+                <Container>
+                    <Row>
+                        <Col style={{ margin: '30px' }}>
+                            <h2>Bem vindo(a), {usuario.nome}!</h2>
+                            <p>Sua última atualização foi em {usuario.updatedAt}</p>
+                        </Col>
+                        <Col md={{ span: 3, offset: 3 }}>
+                            <img id="botao-adicionar-financa" src={BotaoAdicionarFinanca} onClick={abrirModal} width="150" />
+                        </Col>
+                    </Row>
+                </Container>
             </section>
 
             <section id="total-financas">
+                
                 <CardGroup style={{ margin: '30px', color: '#ffffff' }}>
                     <Card bg='success' style={{ padding: '10px', margin: '20px' }}>
                         <Card.Body>
@@ -212,7 +228,7 @@ function Financa() {
                             <Card.Title>R$ {totalDespesas}</Card.Title>
                         </Card.Body>
                     </Card>
-                    <Card bg="warning" style={{ padding: '10px', margin: '20px' }}>
+                    <Card bg="info" style={{ padding: '10px', margin: '20px' }}>
                         <Card.Body>
                             <Card.Subtitle>Saldo</Card.Subtitle><br></br>
                             <Card.Title>R$ {(totalReceitas - totalDespesas).toFixed(2)}</Card.Title>
