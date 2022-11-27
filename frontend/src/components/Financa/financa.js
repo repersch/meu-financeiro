@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { toast } from "react-toastify";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
@@ -75,11 +74,10 @@ function Financa() {
         })
             .then((resposta) => {
                 if (resposta.status >= 200 && resposta.status <= 299) {
-                    setUsuario(resposta.data);
-                    toast.success("Finança cadastrada com sucesso!");
+                    setState(resposta.data)
                 }
                 else {
-                    toast.error("Erro ao cadastrar finança. Cósigo de erro: ${resposta.status}")
+                    console.log(`Erro! Requisição com código ${resposta.status}`);
                 }})
             .catch((erro) => {
                 console.log("Erro ao realizar o fetch");
@@ -89,8 +87,7 @@ function Financa() {
                 });
             });
         setShow(false);
-       
-        // window.location.reload();
+        window.location.reload();
     };
 
     useEffect(() => {

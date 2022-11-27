@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <footer>
+        <footer className="navbar-fixed-bottom">
             <p>
                 Sistema desenvolvido na disciplina de Programação para Web IV pelos alunos:
                 <a href="https://github.com/jmmarao"> João Mateus Marão Domingues</a> &

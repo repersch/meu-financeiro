@@ -23,7 +23,7 @@ function BotaoEditar({ financaSelecionada }) {
     const formularioInicial = ({
         descricao: financaSelecionada.descricao,
         valor: financaSelecionada.valor,
-        tipo: financaSelecionada.tipo,
+        // tipo: financaSelecionada.tipo,
         categoria: financaSelecionada.categoria,
         idUsuario: localStorageItens.idUsuario
     });
@@ -33,17 +33,20 @@ function BotaoEditar({ financaSelecionada }) {
     const handleChange = (e) => {
         updateFormData({
             ...formData,
-
-            // Trimming any whitespace
             [e.target.name]: e.target.value.trim()
         });
     };
+
+    const [tipoFinanca, setTipoFinanca] = useState("");
+    const tratarRadio = (e) => {
+        setTipoFinanca(e.target.value)
+    }
 
     const enviarModal = (e) => {
         const financaParaEditar = {
             descricao: formData.descricao,
             valor: formData.valor,
-            tipo: formData.tipo,
+            tipo: tipoFinanca,
             categoria: formData.categoria,
             idUsuario: localStorageItens.idUsuario
         };
@@ -78,31 +81,46 @@ function BotaoEditar({ financaSelecionada }) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group>
-                            Descrição
+                        <Form.Group style={{ padding: '10px', margin: '20px' }}>
                             <Form.Control className='formControl'
+                                style={{ padding: '10px', margin: '20px' }}
                                 type="text"
                                 placeholder={financaSelecionada.descricao}
                                 onChange={handleChange}
                                 name="descricao"
                             />
 
-                            Categoria
                             <Form.Control className='formControl'
+                                style={{ padding: '10px', margin: '20px' }}
                                 type="text"
                                 onChange={handleChange}
                                 name="categoria"
                                 placeholder={financaSelecionada.categoria} />
 
-                            Tipo
-                            <Form.Control className='formControl'
-                                type="text"
-                                onChange={handleChange}
-                                name="tipo"
-                                placeholder={financaSelecionada.tipo} />
+                            <div style={{ padding: '10px', margin: '20px' }}>
+                                <Form>
+                                    <Form.Check className='formControl'
+                                        inline
+                                        label="Receita"
+                                        name="tipo"
+                                        type="radio"
+                                        onChange={tratarRadio}
+                                        value="Receita"
+                                    />
 
-                            Valor (R$)
+                                    <Form.Check className='formControl'
+                                        inline
+                                        label="Despesa"
+                                        name="tipo"
+                                        type="radio"
+                                        onChange={tratarRadio}
+                                        value="Despesa"
+                                    />
+                                </Form>
+                            </div>
+
                             <Form.Control className='formControl'
+                                style={{ padding: '10px', margin: '20px' }}
                                 type="number"
                                 onChange={handleChange}
                                 name="valor"
