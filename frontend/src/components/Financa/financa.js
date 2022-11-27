@@ -29,7 +29,6 @@ function Financa() {
     const totalDespesas = calcularTotal("Despesa").toFixed(2)
     const totalReceitas = calcularTotal("Receita").toFixed(2)
 
-    // Sugestão para tratamento de erros (bem simplificado)
     const [erro, setErro] = useState({
         hasErro: false,
         mensagemErro: ""
@@ -164,7 +163,6 @@ function Financa() {
                                 <Form>
                                     <Form.Check className='formControl'
                                         inline
-                                        defaultChecked
                                         label="Receita"
                                         name="tipo"
                                         type="radio"

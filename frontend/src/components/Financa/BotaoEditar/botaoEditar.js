@@ -14,7 +14,6 @@ function BotaoEditar({ financaSelecionada }) {
     const fecharModal = () => setShow(false);
     const abrirModal = () => setShow(true);
 
-    // Sugestão para tratamento de erros (bem simplificado)
     const [erro, setErro] = useState({
         hasErro: false,
         mensagemErro: ""

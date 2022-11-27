@@ -27,8 +27,6 @@ function Login() {
     const handleChange = (e) => {
         updateFormData({
             ...formData,
-
-            // Trimming any whitespace
             [e.target.name]: e.target.value.trim()
         });
     };
@@ -63,7 +61,6 @@ function Login() {
                 }
             })
             .catch((erro) => {
-                // Tratamento de erro de execução
                 console.log("Erro ao realizar o fetch");
                 toast.error("Usuário e/ou senha incorreto(s)!");
                 setErro({
@@ -84,8 +81,6 @@ function Login() {
     const tratarFormCadastro = (e) => {
         setFormCadastro({
             ...formCadastro,
-
-            // Trimming any whitespace
             [e.target.name]: e.target.value.trim()
         });
     };
@@ -115,7 +110,6 @@ function Login() {
             })
     };
 
-    // Sugestão para tratamento de erros (bem simplificado)
     const [erro, setErro] = useState({
         hasErro: false,
         mensagemErro: ""

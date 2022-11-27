@@ -32,7 +32,6 @@ function Usuario() {
             });
     }, []);
 
-    // Sugestão para tratamento de erros (bem simplificado)
     const [erro, setErro] = useState({
         hasErro: false,
         mensagemErro: ""
@@ -51,8 +50,6 @@ function Usuario() {
     const handleChange = (e) => {
         updateFormData({
             ...formData,
-
-            // Trimming any whitespace
             [e.target.name]: e.target.value.trim()
         });
     };
@@ -91,13 +88,13 @@ function Usuario() {
                     mensagemErro: "Erro ao realizar o fetch"
                 });
             });
-        // window.location.reload();
     };
 
     return (
         <div>
             <Form id="cadastro-usuario">
                 <Form.Group>
+                <h3>Alterar dados do usuário {usuario.nome}</h3>
                     Nome
                     <Form.Control className='formControl'
                         type="text"
@@ -120,8 +117,6 @@ function Usuario() {
                         Alterar dados
                     </Button>
                 </Form.Group>
-
-               
             </Form>
         </div>
     );
