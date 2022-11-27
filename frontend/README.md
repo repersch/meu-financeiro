@@ -1,3 +1,26 @@
+O site Meu Financeiro foi criado com a intenção de facilitar o controle do usuário sobre o dinheiro recebido e gasto.
+Nele é possível incluir suas receitas e despesas, especificando uma descrição e categoria para o valor recebido ou gasto, esses valores são somados conforme o tipo (receita ou despesa) e mostrados na tela, além da diferença entre eles, sendo fácil visualizar o saldo total.
+Também é mostrada uma tabela com todos as finanças cadastradas pelo usuário logado, é possível editar ou excluir qualquer uma dessas finanças, ao fazer isso os valores totais são atualizados conforme as alterações feitas.
+Na tela inicial é possível cadastrar um novo usuário ou fazer o login de um usuário existente.
+Depois de logado, o usuário pode atualizar suas próprias informações (nome e senha). (Nesse caso a senha fica visível apenas para fins didáticos)
+
+Para executar o projeto:
+    - Na pasta 'backend' executar o comando: node app.js
+    - Na pasta 'frontend' executar os comandos: npm install e depois npm start
+
+
+
+Durante o desenvolvimento, tivemos dificuldade de fazer as requisições utilizando o fetch, por esse motivos, utilizamos o axios conforme haviamos visto no curso: {adicionar o curso aqui}
+
+Para o frontend utilizamos o react-bootstrap no desenvolvimento dos componentes.
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

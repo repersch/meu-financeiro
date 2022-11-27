@@ -63,6 +63,13 @@ header {
     transform: scale(1.2);
 }
 
+#sobre {
+  background-color: #e4e2db;
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 30px;
+}
+
 table {
   margin: auto;
   width: 90%;
