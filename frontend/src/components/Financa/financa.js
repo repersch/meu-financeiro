@@ -10,6 +10,7 @@ import api from '../../service/api.js';
 
 import BotaoEditar from './BotaoEditar/botaoEditar.js';
 import BotaoDeletar from './BotaoDeletar/botaoDeletar.js';
+import FormCheckInput from 'react-bootstrap/esm/FormCheckInput.js';
 
 function Financa() {
     const localStorageItens = JSON.parse(localStorage.getItem('usuarioInfo'));
@@ -21,8 +22,8 @@ function Financa() {
     const fecharModal = () => setShow(false);
     const abrirModal = () => setShow(true);
 
-    const totalDespesas = calcularTotal("DESPESA").toFixed(2)
-    const totalReceitas = calcularTotal("RECEITA").toFixed(2)
+    const totalDespesas = calcularTotal("Despesa").toFixed(2)
+    const totalReceitas = calcularTotal("Receita").toFixed(2)
 
     // Sugestão para tratamento de erros (bem simplificado)
     const [erro, setErro] = useState({
@@ -39,21 +40,24 @@ function Financa() {
     });
 
     const [formData, updateFormData] = useState(formularioInicial);
-
     const handleChange = (e) => {
         updateFormData({
             ...formData,
 
-            // Trimming any whitespace
             [e.target.name]: e.target.value.trim()
         });
     };
+
+    const [tipoFinanca, setTipoFinanca] = useState("");
+    const tratarRadio = (e) => {
+        setTipoFinanca(e.target.value)
+    }
 
     const enviarModal = (e) => {
         const financaParaSalvar = {
             descricao: formData.descricao,
             valor: formData.valor,
-            tipo: formData.tipo,
+            tipo: tipoFinanca,
             categoria: formData.categoria,
             idUsuario: localStorageItens.idUsuario
         };
@@ -144,12 +148,28 @@ function Financa() {
                                 onChange={handleChange}
                                 name="categoria" />
 
-                            <Form.Control className='formControl'
-                                style={{ padding: '10px', margin: '20px' }}
-                                type="text"
-                                placeholder="Tipo"
-                                onChange={handleChange}
-                                name="tipo" />
+                            <div style={{ padding: '10px', margin: '20px' }}>
+                                <Form>
+                                    <Form.Check className='formControl'
+                                        inline
+                                        defaultChecked
+                                        label="Receita"
+                                        name="tipo"
+                                        type="radio"
+                                        onChange={tratarRadio}
+                                        value="Receita"
+                                    />
+
+                                    <Form.Check className='formControl'
+                                        inline
+                                        label="Despesa"
+                                        name="tipo"
+                                        type="radio"
+                                        onChange={tratarRadio}
+                                        value="Despesa"
+                                    />
+                                </Form>
+                            </div>
 
                             <Form.Control className='formControl'
                                 style={{ padding: '10px', margin: '20px' }}
@@ -172,13 +192,13 @@ function Financa() {
 
             </Modal>
 
-            <section id="homeSection">
-                <h2>Bem vindo {usuario.nome}!</h2>
+            <section id="home-section">
+                <h2>Bem vindo(a), {usuario.nome}!</h2>
                 <p>Sua última atualização foi em {usuario.updatedAt}</p>
                 <Button variant="light" onClick={abrirModal}>Adicionar finança</Button>
             </section>
 
-            <section id="totalFinancas">
+            <section id="total-financas">
                 <CardGroup style={{ margin: '30px', color: '#ffffff' }}>
                     <Card bg='success' style={{ padding: '10px', margin: '20px' }}>
                         <Card.Body>

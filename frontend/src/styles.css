@@ -32,9 +32,16 @@ header {
   margin-top: 30px;
 }
 
-#homeSection {
+#home-section {
   padding: 30px;
   justify-content: right;
+}
+
+#login-section {
+  background-color: #e4e2db;
+  border-radius: 10px;
+  padding: 30px 10px;
+  margin-top: 30px;
 }
 
 table {

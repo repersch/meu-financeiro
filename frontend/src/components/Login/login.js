@@ -79,7 +79,7 @@ function Login() {
                             <Form.Control className='formControl'
                                 style={{ padding: '10px', width: '235px', margin: '20px' }}
                                 type="text"
-                                placeholder="Login"
+                                placeholder="Usuário"
                                 onChange={handleChange}
                                 name="username"
                             />
@@ -92,7 +92,7 @@ function Login() {
                                 name="password" />
                             <a href="#" style={{ margin: '20px' }}>Cadastre-se</a>
                             <Button variant="success" onClick={handleSubmit} style={{ margin: '20px' }}>
-                                Logar
+                                Entrar
                             </Button>
                         </Form.Group>
                     </Form>
