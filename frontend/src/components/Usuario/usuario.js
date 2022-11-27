@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from "react-toastify";
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -20,7 +21,7 @@ function Usuario() {
             })
             .then((resposta) => {
                 if (resposta.status >= 200 && resposta.status <= 299) {
-                    setUsuario(resposta.data)
+                    setUsuario(resposta.data);
                 }
                 else {
                     console.log(`Erro! Requisição com código ${resposta.status}`);
@@ -71,7 +72,18 @@ function Usuario() {
                     'x-access-token': localStorageItens.token
                 }
             })
-            .then(resposta => console.log("Posting data: ", resposta))
+            .then((resposta) => {
+                if (resposta.status >= 200 && resposta.status <= 299) {
+                    setUsuario(resposta.data);
+                    toast.success("Dados do usuário alterados com sucesso!");
+                }
+                else {
+                    console.log(`Erro! Requisição com código ${resposta.status}`);
+                    toast.error("Ocorreu um erro");
+                }
+                console.log("Posting data: ", resposta)
+            })
+               
             .catch((erro) => {
                 console.log("Erro ao realizar o fetch");
                 setErro({
@@ -79,7 +91,7 @@ function Usuario() {
                     mensagemErro: "Erro ao realizar o fetch"
                 });
             });
-        window.location.reload();
+        // window.location.reload();
     };
 
     return (
@@ -116,3 +128,4 @@ function Usuario() {
 }
 
 export default Usuario;
+

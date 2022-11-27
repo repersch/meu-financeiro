@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 import api from '../../service/api.js';
 
@@ -43,19 +44,21 @@ function Login() {
                         'token': resposta.data.token,
                         'idUsuario': resposta.data.idUsuario
                     }
-
+                    toast.success("Usuário logado com sucesso!");
                     localStorage.setItem('usuarioInfo', JSON.stringify({ ...usuarioAutenticado })
                     );
 
                     navigate(`/financa`);
                 }
                 else {
+                    toast.error("Usuário e/ou senha incorreto(s)!");
                     console.log(`Erro! Requisição com código ${resposta.status}`);
                 }
             })
             .catch((erro) => {
                 // Tratamento de erro de execução
                 console.log("Erro ao realizar o fetch");
+                toast.error("Usuário e/ou senha incorreto(s)!");
                 setErro({
                     hasErro: true,
                     mensagemErro: "Erro ao realizar o fetch"

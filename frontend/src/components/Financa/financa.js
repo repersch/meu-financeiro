@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from "react-toastify";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
@@ -22,7 +23,6 @@ function Financa() {
 
     const [state, setState] = useState([]);
     const [show, setShow] = useState(false);
-    const [validacao, setValidacao] = useState(false);
 
     const fecharModal = () => setShow(false);
     const abrirModal = () => setShow(true);
@@ -73,7 +73,14 @@ function Financa() {
                 'x-access-token': localStorageItens.token
             }
         })
-            .then(resposta => console.log("Posting data: ", resposta))
+            .then((resposta) => {
+                if (resposta.status >= 200 && resposta.status <= 299) {
+                    setUsuario(resposta.data);
+                    toast.success("Finança cadastrada com sucesso!");
+                }
+                else {
+                    toast.error("Erro ao cadastrar finança. Cósigo de erro: ${resposta.status}")
+                }})
             .catch((erro) => {
                 console.log("Erro ao realizar o fetch");
                 setErro({
@@ -82,7 +89,8 @@ function Financa() {
                 });
             });
         setShow(false);
-        window.location.reload();
+       
+        // window.location.reload();
     };
 
     useEffect(() => {
