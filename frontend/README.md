@@ -10,7 +10,7 @@ Para executar o projeto:
 
 
 
-Durante o desenvolvimento, tivemos dificuldade de fazer as requisições utilizando o fetch, por esse motivos, utilizamos o axios conforme haviamos visto no curso: {adicionar o curso aqui}
+Durante o desenvolvimento, tivemos dificuldade de fazer as requisições utilizando o fetch, por esse motivos, utilizamos o axios conforme haviamos visto no curso: Semana Spring React oferecido pela [DevSuperior](https://devsuperior.com.br/evento-sds) e ministrado pelo professor Nélio Alves.
 
 Para o frontend utilizamos o react-bootstrap no desenvolvimento dos componentes.
 
