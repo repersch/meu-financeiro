@@ -4,7 +4,7 @@ const Usuario = require("../models/usuario.js");
 
 const banco = require("../config/database/db");
 
-const usuario_salvar = (checkToken, async (req, res) => {
+const usuario_salvar = (async (req, res) => {
     await banco.sync();
 
     const nomeSalvar = req.body.nome;
